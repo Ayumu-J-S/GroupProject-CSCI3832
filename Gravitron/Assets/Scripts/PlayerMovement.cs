@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     /* Up and down arrows switch gravity, left and right arrows move (A and D also do this,
      * if we want to change that we'll have to change the Axis), and space jumps
      */
+    public Camera camera;
     private Rigidbody2D rgb;
     private Vector3 horizontalMovement;
     float movementSpeed = 0.1f;
