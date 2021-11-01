@@ -14,14 +14,16 @@ public class PlayerMovement : MonoBehaviour
     float jumpForce = 150.0f;
     private float gravityScale = 1.0f;
     bool onGround;
-    bool gravityDown;
+
+    // Made this public because we can probably reference it in the ball script to know when to flip the balls' gravity
+    public bool playerGravityDown;
 
     // Start is called before the first frame update
     void Start()
     {
         rgb = transform.GetComponent<Rigidbody2D>();
         horizontalMovement = Vector3.zero;
-        gravityDown = true;
+        playerGravityDown = true;
     }
 
     // Update is called once per frame
@@ -44,19 +46,19 @@ public class PlayerMovement : MonoBehaviour
         // Switch gravity if up or down arrows are pressed
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            gravityDown = true;
+            playerGravityDown = true;
             rgb.gravityScale = gravityScale;
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            gravityDown = false;
+            playerGravityDown = false;
             rgb.gravityScale = -gravityScale;
         }
 
         // Jump if space pressed and player is on the ground (prevents jumping midair)
         if (Input.GetKey(KeyCode.Space) && onGround)
         {
-            if (gravityDown)
+            if (playerGravityDown)
             {
                 rgb.AddForce(Vector2.up * jumpForce);
             }
@@ -93,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
          */
 
         // Raycast direction depends on whether gravity is going up or down for the player
-        if (gravityDown)
+        if (playerGravityDown)
         {
             // Raycast below player to find collider within a distance of 0.01 (directly below)
             collider = Physics2D.Raycast(playerPosition, new Vector2(0, -1), 0.01f);
