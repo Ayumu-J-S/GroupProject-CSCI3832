@@ -10,12 +10,20 @@ public class PlayerMovement : MonoBehaviour
     public Camera camera;
     private Rigidbody2D rgb;
     private Vector3 horizontalMovement;
+
+    // Affects player's horizontal speed
     float movementSpeed = 0.1f;
+
+    // Affects player's jump height
     float jumpForce = 150.0f;
-    private float gravityScale = 1.0f;
+
+    // Affects player's fall speed
+    private float gravityScale = 2.0f;
+
+    // Tells whether or not player is currently standing on solid ground
     bool onGround;
 
-    // Made this public because we can probably reference it in the ball script to know when to flip the balls' gravity
+    // NOTE: Made this public because we can probably reference it in the ball script to know when to flip the balls' gravity
     public bool playerGravityDown;
 
     // Start is called before the first frame update
