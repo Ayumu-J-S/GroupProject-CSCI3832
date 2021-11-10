@@ -4,8 +4,10 @@ using UnityEngine;
 
 /**
 When applying this script to the Door, make sure the closed door (Sprite) has
-an opned door (Sprite) behind it, and these doors have the floowing condition.
+an opned door (Sprite) behind it, and these doors have the floowing conditions.
 
+    -The front sprite (opened door) has boxCollider2D, which is a trigger.
+    
     -The rear sprite (closed door) is the child of the front sprite
     (opened door).
  */
