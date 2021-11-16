@@ -10195,6 +10195,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2490373045207038766, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 358725915}
+    - target: {fileID: 2490373045207038766, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 1662898998}
     - target: {fileID: 2864493007429672091, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}
       propertyPath: m_Alpha
       value: 0
@@ -10202,6 +10210,10 @@ PrefabInstance:
     - target: {fileID: 2980169598732482407, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}
       propertyPath: m_Name
       value: LevelLoader
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408550316357990269, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}
+      propertyPath: m_Color.r
+      value: 0.02745098
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}

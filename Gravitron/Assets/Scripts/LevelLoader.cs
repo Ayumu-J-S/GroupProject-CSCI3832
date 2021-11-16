@@ -7,12 +7,29 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
-
+    private float diffxTrans = 0.5f;
+    private float diffyTrans = 0.7f;
+    public GameObject character;
+    public GameObject door;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    LoadNextLevel();
+        //}
+
+        Vector2 posCharacter = character.transform.position;
+        Vector2 posDoor = door.transform.position;
+
+        float diffx = Mathf.Abs(posCharacter.x - posDoor.x);
+        float diffy = Mathf.Abs(posCharacter.y - posDoor.y);
+
+        Debug.Log(diffx);
+        Debug.Log(diffy);
+
+        if (diffx < diffxTrans && diffy < diffyTrans)
         {
             LoadNextLevel();
         }

@@ -3198,13 +3198,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2490373045207038766, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 676966424}
+    - target: {fileID: 2490373045207038766, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 716225998}
     - target: {fileID: 2980169598732482407, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
     - target: {fileID: 8408550316357990269, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8408550316357990269, guid: 16d9360fd512048caa9ecf5ad0cc78a5, type: 3}
       propertyPath: m_Color.b
