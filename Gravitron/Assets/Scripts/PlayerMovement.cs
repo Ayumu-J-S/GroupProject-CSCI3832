@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     float movementSpeed = 0.1f;
 
     // Affects player's jump height
-    float jumpForce = 150.0f;
+    float jumpForce = 200.0f;
 
     // Affects player's fall speed
     private float gravityScale = 2.0f;
@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rgb = transform.GetComponent<Rigidbody2D>();
+        rgb.gravityScale = gravityScale;
         horizontalMovement = Vector3.zero;
         playerGravityDown = true;
     }
@@ -77,13 +78,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // When colliding with another collider
+    // When continuously colliding with another collider, check to see if it is the ground
     void OnCollisionStay2D(Collision2D collider)
     {
         CheckForGround();
     }
 
-    // When no longer colliding with another collider
+    // When no longer colliding with another collider (floating midair)
     void OnCollisionExit2D(Collision2D collider)
     {
         onGround = false;
