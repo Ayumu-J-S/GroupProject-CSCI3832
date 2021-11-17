@@ -11,11 +11,24 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rgb;
     private Vector3 horizontalMovement;
 
+    // Variables for flipping sprite
+    [HideInInspector]
+    public bool isFacingLeft;
+    public bool isUpsideDown;
+    public bool spawnFacingLeft = false;
+    private Vector2 upsideDown;
+    private Vector2 facingLeft;
+
+
+    // variables for animation
+    public Animator animator;
+    public bool isShooting = false;
+
     // Affects player's horizontal speed
-    float movementSpeed = 0.1f;
+    float movementSpeed = 0.2f;
 
     // Affects player's jump height
-    float jumpForce = 200.0f;
+    float jumpForce = 150.0f;
 
     // Affects player's fall speed
     private float gravityScale = 2.0f;
@@ -30,9 +43,18 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rgb = transform.GetComponent<Rigidbody2D>();
-        rgb.gravityScale = gravityScale;
         horizontalMovement = Vector3.zero;
         playerGravityDown = true;
+
+        // handles flipping the characters direction
+        facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
+        upsideDown = new Vector2(transform.localScale.x, -transform.localScale.y);
+        if(spawnFacingLeft)
+        {
+            transform.localScale = facingLeft;
+            isFacingLeft = true;
+        }
+        isUpsideDown = false;
     }
 
     // Update is called once per frame
@@ -41,10 +63,36 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+   
+
     void FixedUpdate()
     {
         // Get the inputs from the player (A, D, and left and right arrows)
         float horizontalInputs = Input.GetAxis("Horizontal");
+
+        // sets the Speed for the animator paramater so that the player switches to
+        // running when running
+        animator.SetFloat("Speed", Mathf.Abs(horizontalInputs));
+
+        // this put the character in the shooting state when the r key is pressed and then 
+        // calls a corouting to make sure that the animation plays in full
+        if(Input.GetKey(KeyCode.R) && isShooting == false)
+        {
+            isShooting = true;
+            animator.SetBool("Shooting", isShooting);
+            StartCoroutine(ShootRoutine());
+        }
+
+        // switches to falling state if the character is in the air
+        if(!onGround)
+        {
+            animator.SetBool("Falling", true);
+        }
+        else
+        {
+            animator.SetBool("Falling", false);
+        }
+
 
         // Set the horizontal movement
         horizontalMovement.x = movementSpeed * horizontalInputs;
@@ -64,6 +112,42 @@ public class PlayerMovement : MonoBehaviour
             rgb.gravityScale = -gravityScale;
         }
 
+
+        /*
+        Very Broken!!
+        */
+
+        // Flips the character based on movement direction
+        if (playerGravityDown && isUpsideDown)
+        {
+            isUpsideDown = false;
+            FlipVertical();
+        }
+        if (!playerGravityDown && !isUpsideDown)
+        {
+            isUpsideDown = true;
+            FlipVertical();
+        }
+
+        // Flips the character based on movement direction
+        if (
+            (horizontalInputs > 0 && isFacingLeft && !isUpsideDown) ||
+            (horizontalInputs < 0 && !isFacingLeft && isUpsideDown))
+        {
+            isFacingLeft = false;
+            FlipHorizontal();
+        }
+        if (
+            (horizontalInputs < 0 && !isFacingLeft && !isUpsideDown) ||
+            (horizontalInputs > 0 && isFacingLeft && isUpsideDown))
+        {
+            isFacingLeft = true;
+            FlipHorizontal();
+        }
+
+
+
+
         // Jump if space pressed and player is on the ground (prevents jumping midair)
         if (Input.GetKey(KeyCode.Space) && onGround)
         {
@@ -78,13 +162,48 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // When continuously colliding with another collider, check to see if it is the ground
+    //  Make sure the shoooting animation plays completely before stopping
+    private IEnumerator ShootRoutine()
+    {
+        yield return new WaitForSeconds(1);
+
+        isShooting = false;
+        animator.SetBool("Shooting", isShooting);
+    }
+
+    // Function for flipping the character's horizontal direction 
+    protected virtual void FlipHorizontal()
+    {
+        if (isFacingLeft)
+        {
+            transform.localScale = facingLeft;
+        }
+        if (!isFacingLeft)
+        {
+            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        }
+    }
+
+    // Function for flipping the character's vertical direction
+    protected virtual void FlipVertical()
+    {
+        if (isUpsideDown)
+        {
+            transform.localScale = upsideDown;
+        }
+        if (!isUpsideDown)
+        {
+            transform.localScale = new Vector2(transform.localScale.x, -transform.localScale.y);
+        }
+    }
+
+    // When colliding with another collider
     void OnCollisionStay2D(Collision2D collider)
     {
         CheckForGround();
     }
 
-    // When no longer colliding with another collider (floating midair)
+    // When no longer colliding with another collider
     void OnCollisionExit2D(Collision2D collider)
     {
         onGround = false;
