@@ -11,15 +11,6 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rgb;
     private Vector3 horizontalMovement;
 
-    // Variables for flipping sprite
-    [HideInInspector]
-    public bool isFacingLeft;
-    public bool isUpsideDown;
-    public bool spawnFacingLeft = false;
-    private Vector2 upsideDown;
-    private Vector2 facingLeft;
-
-
     // variables for animation
     public Animator animator;
     public bool isShooting = false;
@@ -45,16 +36,6 @@ public class PlayerMovement : MonoBehaviour
         rgb = transform.GetComponent<Rigidbody2D>();
         horizontalMovement = Vector3.zero;
         playerGravityDown = true;
-
-        // handles flipping the characters direction
-        facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
-        upsideDown = new Vector2(transform.localScale.x, -transform.localScale.y);
-        if(spawnFacingLeft)
-        {
-            transform.localScale = facingLeft;
-            isFacingLeft = true;
-        }
-        isUpsideDown = false;
     }
 
     // Update is called once per frame
@@ -67,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector3 characterScale = transform.localScale;
+
         // Get the inputs from the player (A, D, and left and right arrows)
         float horizontalInputs = Input.GetAxis("Horizontal");
 
@@ -75,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(horizontalInputs));
 
         // this put the character in the shooting state when the r key is pressed and then 
-        // calls a corouting to make sure that the animation plays in full
+        // calls a coroutine to make sure that the animation plays in full
         if(Input.GetKey(KeyCode.R) && isShooting == false)
         {
             isShooting = true;
@@ -113,37 +96,30 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        /*
-        Very Broken!!
-        */
-
         // Flips the character based on movement direction
-        if (playerGravityDown && isUpsideDown)
+
+        // Flips horizontal direction based on horizontalInputs
+        if(horizontalInputs < 0)
         {
-            isUpsideDown = false;
-            FlipVertical();
+            characterScale.x = -0.3f;
         }
-        if (!playerGravityDown && !isUpsideDown)
+        if(horizontalInputs > 0)
         {
-            isUpsideDown = true;
-            FlipVertical();
+            characterScale.x = 0.3f;
         }
 
-        // Flips the character based on movement direction
-        if (
-            (horizontalInputs > 0 && isFacingLeft && !isUpsideDown) ||
-            (horizontalInputs < 0 && !isFacingLeft && isUpsideDown))
+        // Flips vertical direction based on direction of gravity
+        if(playerGravityDown)
         {
-            isFacingLeft = false;
-            FlipHorizontal();
+            characterScale.y = 0.3f;
         }
-        if (
-            (horizontalInputs < 0 && !isFacingLeft && !isUpsideDown) ||
-            (horizontalInputs > 0 && isFacingLeft && isUpsideDown))
+        if(!playerGravityDown)
         {
-            isFacingLeft = true;
-            FlipHorizontal();
+            characterScale.y = -0.3f;
         }
+
+        // Applies direction changes to character
+        transform.localScale = characterScale;
 
 
 
@@ -171,31 +147,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("Shooting", isShooting);
     }
 
-    // Function for flipping the character's horizontal direction 
-    protected virtual void FlipHorizontal()
-    {
-        if (isFacingLeft)
-        {
-            transform.localScale = facingLeft;
-        }
-        if (!isFacingLeft)
-        {
-            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
-        }
-    }
-
-    // Function for flipping the character's vertical direction
-    protected virtual void FlipVertical()
-    {
-        if (isUpsideDown)
-        {
-            transform.localScale = upsideDown;
-        }
-        if (!isUpsideDown)
-        {
-            transform.localScale = new Vector2(transform.localScale.x, -transform.localScale.y);
-        }
-    }
 
     // When colliding with another collider
     void OnCollisionStay2D(Collision2D collider)
