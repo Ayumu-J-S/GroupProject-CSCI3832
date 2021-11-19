@@ -26,8 +26,8 @@ public class LevelLoader : MonoBehaviour
         float diffx = Mathf.Abs(posCharacter.x - posDoor.x);
         float diffy = Mathf.Abs(posCharacter.y - posDoor.y);
 
-        Debug.Log(diffx);
-        Debug.Log(diffy);
+        //Debug.Log(diffx);
+        //Debug.Log(diffy);
 
         if (diffx < diffxTrans && diffy < diffyTrans)
         {
