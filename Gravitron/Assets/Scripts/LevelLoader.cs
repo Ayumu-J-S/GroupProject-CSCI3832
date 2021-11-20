@@ -15,10 +15,6 @@ public class LevelLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    LoadNextLevel();
-        //}
 
         Vector2 posCharacter = character.transform.position;
         Vector2 posDoor = door.transform.position;
@@ -26,10 +22,10 @@ public class LevelLoader : MonoBehaviour
         float diffx = Mathf.Abs(posCharacter.x - posDoor.x);
         float diffy = Mathf.Abs(posCharacter.y - posDoor.y);
 
-        //Debug.Log(diffx);
-        //Debug.Log(diffy);
 
-        if (diffx < diffxTrans && diffy < diffyTrans)
+        if (diffx < diffxTrans &&
+            diffy < diffyTrans &&
+            ButtonScript.buttonPressed)
         {
             LoadNextLevel();
         }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ButtonScript : MonoBehaviour
 {
     public GameObject Door;
+    public static bool buttonPressed = false;
     private Animator animDoor;
     private Animator animButton;
 
@@ -15,15 +16,11 @@ public class ButtonScript : MonoBehaviour
         animButton = transform.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     private void OnTriggerStay2D(Collider2D other)
     { 
         animButton.Play("Press");
         animDoor.Play("Open");
+        buttonPressed = true;
     }
 
 }
