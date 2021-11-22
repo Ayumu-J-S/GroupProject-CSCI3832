@@ -30,12 +30,16 @@ public class PlayerMovement : MonoBehaviour
     // NOTE: Made this public because we can probably reference it in the ball script to know when to flip the balls' gravity
     public bool playerGravityDown;
 
+    // The ball prefab
+    public GameObject ballObject;
+
     // Start is called before the first frame update
     void Start()
     {
         rgb = transform.GetComponent<Rigidbody2D>();
         horizontalMovement = Vector3.zero;
         playerGravityDown = true;
+        rgb.gravityScale = gravityScale;
     }
 
     // Update is called once per frame
@@ -43,8 +47,6 @@ public class PlayerMovement : MonoBehaviour
     {
         
     }
-
-   
 
     void FixedUpdate()
     {
@@ -64,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
             isShooting = true;
             animator.SetBool("Shooting", isShooting);
             StartCoroutine(ShootRoutine());
+
+            GameObject ball = Instantiate(ballObject, transform.position, ballObject.transform.rotation);
         }
 
         // switches to falling state if the character is in the air
