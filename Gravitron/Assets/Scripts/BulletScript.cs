@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public float bulletSpeed = 5;
+    // Bullet speed
+    public float bulletSpeed = 2;
+    
+    // Bullet's movement
     Vector3 movement = Vector3.zero;
 
-    /* This currently only shoots bullets left to right across the screen.
-        I don't have time to change this right now, so I'm leaving myself instructions
-        on how to do it later:
-            Add a new public variable to BulletController for direction (needs 4 options, enum? Does c# have enums???)
-            Instantiate every instance of BulletPrefab with that direction as an argument
-            Add that variable to this script and use it to determine movement
-            ???
-            Profit */
-    
+    // Possible directions for the bullet trajectory
+    public enum Direction { Up, Down, Left, Right };
+
+    // Direction of bullet trajectory
+    private Direction bulletDirection;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Get the bullet controller
+        GameObject controller = GameObject.Find("BulletController");
+
+        // Get the controller's script
+        BulletControl controllerScript = controller.GetComponent<BulletControl>();
+
+        // Get direction from controller
+        bulletDirection = (Direction)controllerScript.bulletDirection;
     }
 
     // Update is called once per frame
@@ -30,8 +37,29 @@ public class BulletScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        movement.x = bulletSpeed * Time.deltaTime;
+        // Get direction of bullet trajectory
+        switch (bulletDirection)
+        {
+            case Direction.Up:
+                movement.y = bulletSpeed * Time.deltaTime;
+                break;
+            case Direction.Down:
+                movement.y = -1 * bulletSpeed * Time.deltaTime;
+                break;
+            case Direction.Left:
+                movement.x = -1 * bulletSpeed * Time.deltaTime;
+                break;
+            case Direction.Right:
+                movement.x = bulletSpeed * Time.deltaTime;
+                break;
+            default:
+                Debug.Log("Error: Could not parse bullet direction");
+                break;
+        }
+
+        // Move bullet
         transform.position += movement;
+
     }
 
     // Destroy the bullet when it hits something

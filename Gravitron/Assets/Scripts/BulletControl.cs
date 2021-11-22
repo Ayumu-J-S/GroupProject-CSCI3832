@@ -11,12 +11,22 @@ public class BulletControl : MonoBehaviour
     public float shootingRate = 1f;
 
     // Position vector for bullet spawnpoint
-    public Vector3 position;
+    private Vector3 position;
+    
+    // Possible directions for the bullet trajectory
+    public enum Direction {Up, Down, Left, Right};
+
+    // Direction of bullet trajectory
+    public Direction bulletDirection;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        //bulletObject = GameObject.Find("BulletPrefab");
+        // Set bullet spawnpoint to controller's position
+        position = transform.position;
+
+        // Start spawning bullets
         StartCoroutine("ShootBullets");
     }
 
@@ -26,17 +36,16 @@ public class BulletControl : MonoBehaviour
         
     }
 
+    // Spawns a new bullet every x seconds, x being the shooting rate
     IEnumerator ShootBullets()
     {
-        // *** DELETE THIS COMMENT LATER ***
-        // Will this run indefinitely in the background while the player is in other scenes, or will it stop
-        // when the scene isn't loaded anymore? If we start having a heckton of lag this may be why
-        // Also, this script should probably be attached to a null object and NOT the bullets, because new bullets
-        // are constantly being created by this script
+        // Runs until scene is finished
         while(true)
         {
+            // Create a new bullet
             GameObject bullet = Instantiate(bulletObject, position, bulletObject.transform.rotation);
             
+            // Wait
             yield return new WaitForSeconds(shootingRate);
         }
     }
