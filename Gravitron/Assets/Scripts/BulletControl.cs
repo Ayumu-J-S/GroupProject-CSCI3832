@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletControl : MonoBehaviour
 {
     // The bullet object to be recreated
-    public GameObject bulletObject;
+    private GameObject bulletObject;
 
     // Time (in seconds) between the firing of each bullet
     public float shootingRate = 1f;
@@ -23,6 +23,9 @@ public class BulletControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Get the bullet prefab
+        bulletObject = (UnityEngine.GameObject)Resources.Load("BulletPrefab");
+
         // Set bullet spawnpoint to controller's position
         position = transform.position;
 

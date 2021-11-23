@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public bool playerGravityDown;
 
     // The ball prefab
-    public GameObject ballObject;
+    private GameObject ballObject;
 
     // Tells which direction the character is facing
     public Vector3 characterScale;
@@ -39,10 +39,18 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Get this object's Rigidbody component
         rgb = transform.GetComponent<Rigidbody2D>();
+
+        // Initialize horizontal movement vector
         horizontalMovement = Vector3.zero;
+
+        // Initialize player gravity direction and scale
         playerGravityDown = true;
         rgb.gravityScale = gravityScale;
+
+        // Get the ball prefab
+        ballObject = (UnityEngine.GameObject) Resources.Load("BallPrefab");
     }
 
     // Update is called once per frame

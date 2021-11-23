@@ -9721,7 +9721,11 @@ PrefabInstance:
     - target: {fileID: 6017142373972408070, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
       propertyPath: ballObject
       value: 
-      objectReference: {fileID: 6144700166950119919, guid: 3927c3dd81be70d42af0cc9d2c1dbc36, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017142373972408088, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6017142373972408091, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
       propertyPath: m_RootOrder
       value: 4

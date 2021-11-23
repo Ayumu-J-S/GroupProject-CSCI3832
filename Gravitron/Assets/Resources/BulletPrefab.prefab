@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1149156785998774092}
   - component: {fileID: 1149156785998774095}
   - component: {fileID: 9106905560534478306}
-  - component: {fileID: 4831454581760552215}
+  - component: {fileID: 5772564022651245464}
   m_Layer: 0
   m_Name: BulletPrefab
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149156785998774088}
   m_LocalRotation: {x: -0, y: -0, z: -0.70710707, w: 0.7071066}
-  m_LocalPosition: {x: -12.39, y: 1.47, z: 0}
-  m_LocalScale: {x: 0.45446497, y: 0.5116255, z: 1}
+  m_LocalPosition: {x: -12.4215, y: 1.47, z: 0}
+  m_LocalScale: {x: 0.45446497, y: 0.44859326, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfdc6eb866651c147b22fae68d5bae99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!70 &4831454581760552215
-CapsuleCollider2D:
+--- !u!58 &5772564022651245464
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,5 +146,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.0000002, y: 2.0000005}
-  m_Direction: 0
+  serializedVersion: 2
+  m_Radius: 0.5000002
