@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     float jumpForce = 150.0f;
 
     // Affects player's fall speed
-    private float gravityScale = 2.0f;
+    private float gravityScale = 1.0f;
 
     // Tells whether or not player is currently standing on solid ground
     bool onGround;
@@ -32,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
 
     // The ball prefab
     public GameObject ballObject;
+
+    // Tells which direction the character is facing
+    public Vector3 characterScale;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +53,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 characterScale = transform.localScale;
+        // NOTE: I made this a public variable so I can access it in the ball's script to know which way
+        // the character is facing (so the ball shoots in the right direction) - Theresa
+        characterScale = transform.localScale;
 
         // Get the inputs from the player (A, D, and left and right arrows)
         float horizontalInputs = Input.GetAxis("Horizontal");
@@ -66,8 +71,6 @@ public class PlayerMovement : MonoBehaviour
             isShooting = true;
             animator.SetBool("Shooting", isShooting);
             StartCoroutine(ShootRoutine());
-
-            GameObject ball = Instantiate(ballObject, transform.position, ballObject.transform.rotation);
         }
 
         // switches to falling state if the character is in the air
@@ -126,8 +129,6 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = characterScale;
 
 
-
-
         // Jump if space pressed and player is on the ground (prevents jumping midair)
         if (Input.GetKey(KeyCode.Space) && onGround)
         {
@@ -145,7 +146,18 @@ public class PlayerMovement : MonoBehaviour
     //  Make sure the shoooting animation plays completely before stopping
     private IEnumerator ShootRoutine()
     {
-        yield return new WaitForSeconds(1);
+        // Wait until halfway through the animation
+        yield return new WaitForSeconds(0.5f);
+
+        // Get position for the ball to spawn in (based on where character is facing)
+        Vector3 ballPosition = transform.position;
+        ballPosition.x += characterScale.x * 2.5f;
+
+        // Shoot the ball
+        GameObject ball = Instantiate(ballObject, ballPosition, ballObject.transform.rotation);
+
+        // Wait for the rest of the animation to play
+        yield return new WaitForSeconds(0.5f);
 
         isShooting = false;
         animator.SetBool("Shooting", isShooting);

@@ -16,6 +16,12 @@ public class BallScript : MonoBehaviour
     // The Rigidbody attached to this ball
     private Rigidbody2D rgb;
 
+    // The direction the ball is being shot in (negative is left, positive is right)
+    private float direction;
+
+    // The force at which the ball is shot
+    public float shootingForce = 3.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,13 +37,29 @@ public class BallScript : MonoBehaviour
         // Get the player's script
         playerScript = player.GetComponent<PlayerMovement>();
 
+        // Set the ball's gravity opposite that of the player
         ballGravityDown = !playerScript.playerGravityDown;
 
+        // Reverse the gravity scale if in the wrong direction
         if(!ballGravityDown)
         {
             rgb.gravityScale = -1.0f * gravityScale;
         }
 
+        // Get the direction the character is facing
+        direction = playerScript.characterScale.x;
+
+        Debug.Log(direction);
+
+        // If the character is facing right
+        if (direction > 0)
+        {
+            rgb.AddForce(Vector2.right * shootingForce, ForceMode2D.Impulse);
+        }
+        else // the character is facing left
+        {
+            rgb.AddForce(Vector2.left * shootingForce, ForceMode2D.Impulse);
+        }
 
     }
 
@@ -49,7 +71,10 @@ public class BallScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Set the ball gravity opposite to the player's gravity
         ballGravityDown = !playerScript.playerGravityDown;
+
+        // Change the gravity scale based on the direction of the ball's gravity
         if (!ballGravityDown)
         {
             rgb.gravityScale = -1.0f * gravityScale;
@@ -59,6 +84,5 @@ public class BallScript : MonoBehaviour
             rgb.gravityScale = 1.0f * gravityScale;
         }
 
-        Debug.Log(playerScript.playerGravityDown);
     }
 }
