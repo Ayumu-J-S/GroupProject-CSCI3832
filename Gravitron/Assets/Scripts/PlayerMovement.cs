@@ -36,6 +36,9 @@ public class PlayerMovement : MonoBehaviour
     // Tells which direction the character is facing
     public Vector3 characterScale;
 
+    // The particle system component for death animation
+    private ParticleSystem deathparticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +54,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Get the ball prefab
         ballObject = (UnityEngine.GameObject) Resources.Load("BallPrefab");
+
+        // Get this object's ParticleSystem component
+        deathparticles = transform.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -214,5 +220,27 @@ public class PlayerMovement : MonoBehaviour
         {
             onGround = true;
         }
+    }
+
+    public IEnumerator Die()
+    {
+        Debug.Log("Ya dead");
+
+        // THIS DOESN'T WORK YET.
+        // I gotta find a better way than "SetActive" to make the player disappear
+        // because if they're inactive then the particle effect doesn't play.
+        // Probably something to do with the Renderer has the solution for this,
+        // but I've run out of time and I wanna push this so other people can work
+        // without me overwriting their stuff. I will finish this by tomorrow
+
+        deathparticles.Play();
+
+        gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1);
+
+        transform.position = new Vector3(-12f, -3f, 0);
+
+        gameObject.SetActive(true);
     }
 }

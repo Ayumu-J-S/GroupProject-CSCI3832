@@ -9774,6 +9774,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5511726945777325567, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
+      propertyPath: ShapeModule.type
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511726945777325567, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511726945777325567, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511726945777325567, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
+      propertyPath: CollisionModule.collisionMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511726945777325567, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511726945777325567, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511726945777325567, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
+      propertyPath: CollisionModule.multiplyColliderForceByParticleSize
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6017142373972408091, guid: e4de142127ed84406a5576bbd58c9d47, type: 3}
       propertyPath: m_RootOrder
       value: 5
