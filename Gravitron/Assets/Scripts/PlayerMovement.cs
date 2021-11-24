@@ -31,7 +31,10 @@ public class PlayerMovement : MonoBehaviour
     public bool playerGravityDown;
 
     // The ball prefab
-    private GameObject ballObject;
+    private GameObject ballPrefab;
+
+    // The ball object in the scene
+    private GameObject ball;
 
     // Tells which direction the character is facing
     public Vector3 characterScale;
@@ -59,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         rgb.gravityScale = gravityScale;
 
         // Get the ball prefab
-        ballObject = (UnityEngine.GameObject) Resources.Load("BallPrefab");
+        ballPrefab = (UnityEngine.GameObject) Resources.Load("BallPrefab");
 
         // Get the particle effect prefab
         deathParticles = (UnityEngine.GameObject) Resources.Load("Death Particles");
@@ -169,12 +172,15 @@ public class PlayerMovement : MonoBehaviour
         // Wait until halfway through the animation
         yield return new WaitForSeconds(0.5f);
 
+        // Destroy the ball that has already been shot
+        Destroy(ball);
+
         // Get position for the ball to spawn in (based on where character is facing)
         Vector3 ballPosition = transform.position;
         ballPosition.x += characterScale.x * 2.5f;
 
         // Shoot the ball
-        GameObject ball = Instantiate(ballObject, ballPosition, ballObject.transform.rotation);
+        ball = Instantiate(ballPrefab, ballPosition, ballPrefab.transform.rotation);
 
         // Wait for the rest of the animation to play
         yield return new WaitForSeconds(0.5f);
@@ -236,6 +242,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Make the player disappear
         renderer.enabled = false;
+
+        // Destroy the ball
+        Destroy(ball);
 
         // Play the particle effect
         deathParticleAnimation.Play();
