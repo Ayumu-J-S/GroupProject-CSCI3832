@@ -234,8 +234,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Calls the respawn coroutine
+    public void Die()
+    {
+        StartCoroutine("Respawn");
+    }
+
     // The player's death animation and respawn when an obstacle is hit
-    public IEnumerator Die()
+    public IEnumerator Respawn()
     {
         // Instantiate the particle effect
         ParticleSystem deathParticleAnimation = Instantiate(deathParticles, transform.position, transform.rotation).GetComponent<ParticleSystem>();
@@ -249,16 +255,26 @@ public class PlayerMovement : MonoBehaviour
         // Play the particle effect
         deathParticleAnimation.Play();
 
+        Debug.Log("a");
+
         // Wait
         yield return new WaitForSeconds(1);
+
+        Debug.Log("b");
 
         // Respawn the player
         transform.position = new Vector3(-12f, -3f, 0);
 
+        Debug.Log("c");
+
         // Make player visible again
         renderer.enabled = true;
 
+        Debug.Log("d");
+
         // Destroy particle effect object
         Destroy(deathParticleAnimation.gameObject);
+
+        Debug.Log("e");
     }
 }

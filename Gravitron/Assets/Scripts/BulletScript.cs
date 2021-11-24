@@ -63,8 +63,8 @@ public class BulletScript : MonoBehaviour
     }
 
     // Destroy the bullet when it hits something
-    void OnCollisionEnter2D()
+    void OnCollisionEnter2D(Collision2D col)
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }

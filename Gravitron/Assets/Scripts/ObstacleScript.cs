@@ -21,16 +21,11 @@ public class ObstacleScript : MonoBehaviour
         // If collided with player
         if (col.gameObject.name == "Player")
         {
-            // Respawn player
-            //col.gameObject.transform.position = new Vector3(-12f, -3f, 0);
-
             // Get the player's script
             PlayerMovement playerScript = col.gameObject.GetComponent<PlayerMovement>();
 
             // Kill and respawn the player
-            StartCoroutine(playerScript.Die());
-
-            // TODO: Add deletion of all gravity balls in the level
+            playerScript.Die();
         }
     }
 }
