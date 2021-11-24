@@ -37,13 +37,19 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 characterScale;
 
     // The particle system component for death animation
-    private ParticleSystem deathparticles;
+    private GameObject deathParticles;
+
+    // This object's Renderer component
+    Renderer renderer;
 
     // Start is called before the first frame update
     void Start()
     {
         // Get this object's Rigidbody component
         rgb = transform.GetComponent<Rigidbody2D>();
+
+        // Get this object's Renderer component
+        renderer = transform.GetComponent<Renderer>();
 
         // Initialize horizontal movement vector
         horizontalMovement = Vector3.zero;
@@ -55,8 +61,8 @@ public class PlayerMovement : MonoBehaviour
         // Get the ball prefab
         ballObject = (UnityEngine.GameObject) Resources.Load("BallPrefab");
 
-        // Get this object's ParticleSystem component
-        deathparticles = transform.GetComponent<ParticleSystem>();
+        // Get the particle effect prefab
+        deathParticles = (UnityEngine.GameObject) Resources.Load("Death Particles");
     }
 
     // Update is called once per frame
@@ -222,25 +228,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // The player's death animation and respawn when an obstacle is hit
     public IEnumerator Die()
     {
-        Debug.Log("Ya dead");
+        // Instantiate the particle effect
+        ParticleSystem deathParticleAnimation = Instantiate(deathParticles, transform.position, transform.rotation).GetComponent<ParticleSystem>();
 
-        // THIS DOESN'T WORK YET.
-        // I gotta find a better way than "SetActive" to make the player disappear
-        // because if they're inactive then the particle effect doesn't play.
-        // Probably something to do with the Renderer has the solution for this,
-        // but I've run out of time and I wanna push this so other people can work
-        // without me overwriting their stuff. I will finish this by tomorrow
+        // Make the player disappear
+        renderer.enabled = false;
 
-        deathparticles.Play();
+        // Play the particle effect
+        deathParticleAnimation.Play();
 
-        gameObject.SetActive(false);
-
+        // Wait
         yield return new WaitForSeconds(1);
 
+        // Respawn the player
         transform.position = new Vector3(-12f, -3f, 0);
 
-        gameObject.SetActive(true);
+        // Make player visible again
+        renderer.enabled = true;
+
+        // Destroy particle effect object
+        Destroy(deathParticleAnimation.gameObject);
     }
 }
