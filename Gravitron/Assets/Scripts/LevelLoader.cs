@@ -28,6 +28,7 @@ public class LevelLoader : MonoBehaviour
             ButtonScript.buttonPressed)
         {
             LoadNextLevel();
+            ButtonScript.buttonPressed = false;
         }
     }
 
