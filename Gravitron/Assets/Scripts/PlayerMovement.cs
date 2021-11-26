@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     float jumpForce = 150.0f;
 
     // Affects player's fall speed
-    private float gravityScale = 1.0f;
+    private float gravityScale = 2.0f;
 
     // Tells whether or not player is currently standing on solid ground
     bool onGround;
