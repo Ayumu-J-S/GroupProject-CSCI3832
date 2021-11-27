@@ -46,6 +46,9 @@ public class PlayerMovement : MonoBehaviour
     // This object's Renderer component
     Renderer renderer;
 
+    // This object's Collider component
+    Collider2D collider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Get this object's Renderer component
         renderer = transform.GetComponent<Renderer>();
+
+        // Get this object's Collider component
+        collider = transform.GetComponent<Collider2D>();
 
         // Initialize horizontal movement vector
         horizontalMovement = Vector3.zero;
@@ -250,6 +256,9 @@ public class PlayerMovement : MonoBehaviour
         // Make the player disappear
         renderer.enabled = false;
 
+        // Disable player collision
+        collider.enabled = false;
+
         // Destroy the ball
         Destroy(ball);
 
@@ -264,21 +273,8 @@ public class PlayerMovement : MonoBehaviour
         //This will be seen in the levelLoader script and scene will reload
         playerDead = true;
 
-        Debug.Log("b");
-
-        // Respawn the player
-        //transform.position = new Vector3(-12f, -3f, 0);
-
-        Debug.Log("c");
-
-        // Make player visible again
-        //renderer.enabled = true;
-
-        Debug.Log("d");
-
         // Destroy particle effect object
         Destroy(deathParticleAnimation.gameObject);
 
-        Debug.Log("e");
     }
 }
