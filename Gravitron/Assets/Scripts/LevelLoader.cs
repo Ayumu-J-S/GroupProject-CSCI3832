@@ -25,7 +25,8 @@ public class LevelLoader : MonoBehaviour
 
         if (diffx < diffxTrans &&
             diffy < diffyTrans &&
-            ButtonScript.buttonPressed)
+            ButtonScript.buttonPressed &&
+            !PlayerMovement.playerDead)
         {
             LoadNextLevel();
             ButtonScript.buttonPressed = false;
