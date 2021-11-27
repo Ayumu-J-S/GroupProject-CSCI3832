@@ -10,6 +10,7 @@ public class DemoAnimation : MonoBehaviour
     private Animator spikesUpAnim;
     private Animator spikesDownAnim;
     private Animator animButton;
+    private bool shown = false;
 
 
     //Plays the demo 3 time with the interval of seconds 
@@ -43,6 +44,10 @@ public class DemoAnimation : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        StartCoroutine(PlayDemo(1f));
+        if (!shown)
+        {
+            StartCoroutine(PlayDemo(1f));
+            shown = true;
+        }
     }
 }
