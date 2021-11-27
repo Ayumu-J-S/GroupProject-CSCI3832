@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     float movementSpeed = 0.2f;
 
     // Affects player's jump height
-    float jumpForce = 150.0f;
+    float jumpForce = 350.0f;
 
     // Affects player's fall speed
     private float gravityScale = 2.0f;
@@ -158,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
         // Applies direction changes to character
         transform.localScale = characterScale;
 
+
         // Jump if space pressed and player is on the ground (prevents jumping midair)
         if (Input.GetKey(KeyCode.Space) && onGround)
         {
@@ -226,16 +227,16 @@ public class PlayerMovement : MonoBehaviour
         if (playerGravityDown)
         {
             // Raycast above player to find collider within a distance of 0.01 (directly above)
-            collider = Physics2D.Raycast(playerPosition, new Vector2(0, -0.01f), 0.0001f);
+            collider = Physics2D.Raycast(playerPosition, Vector2.down, 1.15f);
         }
         else
         {
             // Raycast above player to find collider within a distance of 0.01 (directly above)
-            collider = Physics2D.Raycast(playerPosition, new Vector2(0, -0.01f), 0.0001f);
+            collider = Physics2D.Raycast(playerPosition, Vector2.up, 1.15f);
         }
 
         // If a collider is found, there is ground under the player
-        if (collider.collider)
+        if (collider)
         {
             onGround = true;
         }
