@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     float movementSpeed = 0.2f;
 
     // Affects player's jump height
-    float jumpForce = 150.0f;
+    float jumpForce = 350.0f;
 
     // Affects player's fall speed
     private float gravityScale = 2.0f;
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     Renderer renderer;
 
     // This object's Collider component
-    Collider2D collider;
+    Collider2D playerCollider;
 
     //Audio Clips for sound effect
     public AudioClip shootAudio;
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         renderer = transform.GetComponent<Renderer>();
 
         // Get this object's Collider component
-        collider = transform.GetComponent<Collider2D>();
+        playerCollider = transform.GetComponent<Collider2D>();
 
         // Initialize horizontal movement vector
         horizontalMovement = Vector3.zero;
@@ -178,6 +178,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 rgb.AddForce(Vector2.down * jumpForce);
             }
+            onGround = false;
         }
     }
 
@@ -236,19 +237,23 @@ public class PlayerMovement : MonoBehaviour
         // Raycast direction depends on whether gravity is going up or down for the player
         if (playerGravityDown)
         {
-            // Raycast below player to find collider within a distance of 0.01 (directly below)
-            collider = Physics2D.Raycast(playerPosition, new Vector2(0, -1), 0.01f);
+            // Raycast above player to find collider within a distance of 0.01 (directly above)
+            collider = Physics2D.Raycast(playerPosition, Vector2.down, 1.15f);
         }
         else
         {
             // Raycast above player to find collider within a distance of 0.01 (directly above)
-            collider = Physics2D.Raycast(playerPosition, new Vector2(0, 1), 0.01f);
+            collider = Physics2D.Raycast(playerPosition, Vector2.up, 1.15f);
         }
 
         // If a collider is found, there is ground under the player
         if (collider)
         {
             onGround = true;
+        }
+        else
+        {
+            onGround = false;
         }
     }
 
@@ -268,15 +273,13 @@ public class PlayerMovement : MonoBehaviour
         renderer.enabled = false;
 
         // Disable player collision
-        collider.enabled = false;
+        playerCollider.enabled = false;
 
         // Destroy the ball
         Destroy(ball);
 
         // Play the particle effect
         deathParticleAnimation.Play();
-
-        Debug.Log("a");
 
         // Wait
         yield return new WaitForSeconds(1);
