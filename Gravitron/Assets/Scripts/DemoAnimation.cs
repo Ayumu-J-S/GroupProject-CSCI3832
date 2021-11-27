@@ -46,7 +46,7 @@ public class DemoAnimation : MonoBehaviour
     {
         if (!shown)
         {
-            StartCoroutine(PlayDemo(1f));
+            StartCoroutine(PlayDemo(0.8f));
             shown = true;
         }
     }
