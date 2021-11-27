@@ -16,11 +16,15 @@ public class ButtonScript : MonoBehaviour
         animButton = transform.GetComponent<Animator>();
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     { 
         animButton.Play("Press");
         animDoor.Play("Open");
         buttonPressed = true;
+        if (PlayerMovement.playerDead)
+        {
+            buttonPressed = false;
+        }
     }
 
 }

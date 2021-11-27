@@ -30,6 +30,12 @@ public class LevelLoader : MonoBehaviour
             LoadNextLevel();
             ButtonScript.buttonPressed = false;
         }
+
+        if (PlayerMovement.playerDead) {
+            LoadCurrentLevel();
+            PlayerMovement.playerDead = false;
+            ButtonScript.buttonPressed = false;
+        }
     }
 
     IEnumerator LoadLevel(int levelIndex)
@@ -50,5 +56,9 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
+    public void LoadCurrentLevel()
+    {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+    }
 }
 

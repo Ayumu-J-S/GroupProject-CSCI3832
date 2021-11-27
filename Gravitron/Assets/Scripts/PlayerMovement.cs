@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Camera camera;
     private Rigidbody2D rgb;
     private Vector3 horizontalMovement;
+    public static bool playerDead = false;
 
     // variables for animation
     public Animator animator;
@@ -260,15 +261,18 @@ public class PlayerMovement : MonoBehaviour
         // Wait
         yield return new WaitForSeconds(1);
 
+        //This will be seen in the levelLoader script and scene will reload
+        playerDead = true;
+
         Debug.Log("b");
 
         // Respawn the player
-        transform.position = new Vector3(-12f, -3f, 0);
+        //transform.position = new Vector3(-12f, -3f, 0);
 
         Debug.Log("c");
 
         // Make player visible again
-        renderer.enabled = true;
+        //renderer.enabled = true;
 
         Debug.Log("d");
 
