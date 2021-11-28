@@ -49,6 +49,15 @@ public class PlayerMovement : MonoBehaviour
     // This object's Collider component
     Collider2D playerCollider;
 
+    // Audio
+    public AudioClip shootAudio;
+    public AudioClip gravityFlipAudio;
+    public AudioClip spikeAudio;
+    private AudioSource audioSource;
+
+    // Variable to compare with the current scale of y in update
+    private float previousScaleY;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,12 +82,23 @@ public class PlayerMovement : MonoBehaviour
 
         // Get the particle effect prefab
         deathParticles = (UnityEngine.GameObject) Resources.Load("Death Particles");
+
+        // Get AudioSource component
+        audioSource = transform.GetComponent<AudioSource>();
+
+        // Get the current scale of the Y
+        previousScaleY = transform.localScale.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        float currentScaleY = transform.localScale.y;
+        if (currentScaleY != previousScaleY)
+        {
+            audioSource.PlayOneShot(gravityFlipAudio);
+        }
+        previousScaleY = currentScaleY;
     }
 
     void FixedUpdate()
@@ -187,6 +207,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 ballPosition = transform.position;
         ballPosition.x += characterScale.x * 2.5f;
 
+        audioSource.PlayOneShot(shootAudio);
+
         // Shoot the ball
         ball = Instantiate(ballPrefab, ballPosition, ballPrefab.transform.rotation);
 
@@ -249,6 +271,7 @@ public class PlayerMovement : MonoBehaviour
     // Calls the respawn coroutine
     public void Die()
     {
+        audioSource.PlayOneShot(spikeAudio);
         StartCoroutine("Respawn");
     }
 

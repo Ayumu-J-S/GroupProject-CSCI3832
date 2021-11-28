@@ -10021,6 +10021,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Door: {fileID: 622101534}
+  doorAudio: {fileID: 8300000, guid: fa4a881872c0c45118d170f3d63e8b1b, type: 3}
+  buttonAudio: {fileID: 8300000, guid: ceddbbf5e870045e88315a3058e20bce, type: 3}
 --- !u!1 &1988035363 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3101333053734776804, guid: 05808ec4dea614542a28b6b44b990210, type: 3}
