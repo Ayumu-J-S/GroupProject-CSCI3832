@@ -10021,7 +10021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3849341542197982305, guid: b8ba18be5fbc71d4e941de1c981bf477, type: 3}
       propertyPath: shootingRate
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3849341542197982305, guid: b8ba18be5fbc71d4e941de1c981bf477, type: 3}
       propertyPath: bulletDirection
