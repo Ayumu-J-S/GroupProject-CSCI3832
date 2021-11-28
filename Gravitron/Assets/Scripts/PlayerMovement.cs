@@ -49,11 +49,6 @@ public class PlayerMovement : MonoBehaviour
     // This object's Collider component
     Collider2D playerCollider;
 
-    //Audio Clips for sound effect
-    public AudioClip shootAudio;
-    public AudioClip gravityFlipAudio;
-    private AudioSource audioSource;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -78,9 +73,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Get the particle effect prefab
         deathParticles = (UnityEngine.GameObject) Resources.Load("Death Particles");
-
-        //Get the audio source component here
-        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -194,9 +186,6 @@ public class PlayerMovement : MonoBehaviour
         // Get position for the ball to spawn in (based on where character is facing)
         Vector3 ballPosition = transform.position;
         ballPosition.x += characterScale.x * 2.5f;
-
-        // Play the shooting sound
-        audioSource.PlayOneShot(shootAudio);
 
         // Shoot the ball
         ball = Instantiate(ballPrefab, ballPosition, ballPrefab.transform.rotation);
