@@ -5049,7 +5049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a482cbdd5ddc5a43b1aaffdf874c665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingRate: 1
+  shootingRate: 2
   bulletDirection: 2
 --- !u!4 &1399422957
 Transform:
