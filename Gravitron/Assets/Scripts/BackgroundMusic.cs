@@ -15,7 +15,6 @@ public class BackgroundMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void Awake()
@@ -23,6 +22,7 @@ public class BackgroundMusic : MonoBehaviour
         //Dont destroy the background music when transitioning
         if (backgroundMusic == null)
         {
+            //Assign this gameobject itself 
             backgroundMusic = this;
             DontDestroyOnLoad(backgroundMusic);
         }
