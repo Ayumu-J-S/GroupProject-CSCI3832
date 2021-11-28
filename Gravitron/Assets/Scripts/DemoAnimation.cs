@@ -16,7 +16,7 @@ public class DemoAnimation : MonoBehaviour
     //Plays the demo 3 time with the interval of seconds 
     IEnumerator PlayDemo(float seconds)
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
             animButton.Play("Press");
             spikesUpAnim.Play("MoveSpikesUp");
