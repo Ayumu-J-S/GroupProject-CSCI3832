@@ -125,7 +125,7 @@ MonoBehaviour:
   characterScale: {x: 0, y: 0, z: 0}
   shootAudio: {fileID: 8300000, guid: 33c588ef71bc741edb1484dd22e28354, type: 3}
   gravityFlipAudio: {fileID: 8300000, guid: c6b2b8a747d4c40129eb0cc1a258390e, type: 3}
-  spikeAudio: {fileID: 8300000, guid: a91b59a365c4b426da7c7eb0fce76465, type: 3}
+  spikeAudio: {fileID: 0}
 --- !u!60 &6017142373972408089
 PolygonCollider2D:
   m_ObjectHideFlags: 0
