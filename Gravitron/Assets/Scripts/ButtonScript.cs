@@ -32,9 +32,14 @@ public class ButtonScript : MonoBehaviour
     { 
         animButton.Play("Press");
         animDoor.Play("Open");
-        buttonPressed = true;
 
-        StartCoroutine("StartButtonDoorAudio");
+        if (!buttonPressed)
+        {
+            StartCoroutine("StartButtonDoorAudio");
+        }
+
+
+        buttonPressed = true;
 
         if (PlayerMovement.playerDead)
         {
