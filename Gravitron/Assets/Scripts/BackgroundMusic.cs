@@ -19,7 +19,7 @@ public class BackgroundMusic : MonoBehaviour
 
     private void Awake()
     {
-        //Dont destroy the background music when transitioning
+        // If backgroundMusic is null (first time being called)
         if (backgroundMusic == null)
         {
             //Assign this gameobject itself 
@@ -28,6 +28,7 @@ public class BackgroundMusic : MonoBehaviour
         }
         else
         {
+            // If backgroundMusic exits in the scene, destory it
             Destroy(gameObject);
         }
     }
