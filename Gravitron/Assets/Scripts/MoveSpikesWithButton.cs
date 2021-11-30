@@ -12,6 +12,7 @@ public class MoveSpikesWithButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Get the animator of the spikes
         spikesUpAnim = SpikesUp.GetComponent<Animator>();
         spikesDownAnim = SpikesDown.GetComponent<Animator>();
     }
@@ -19,6 +20,7 @@ public class MoveSpikesWithButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Play the animation if the button is pressed
         if (ButtonScript.buttonPressed)
         {
             spikesUpAnim.Play("MoveSpikesUp");
