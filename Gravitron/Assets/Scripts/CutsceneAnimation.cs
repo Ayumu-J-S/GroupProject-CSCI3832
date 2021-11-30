@@ -67,8 +67,7 @@ public class CutsceneAnimation : MonoBehaviour
             {
                 isStanding = !isStanding;
                 StartCoroutine(SitRoutine());
-                animator.SetBool("Standing", isStanding);
-
+                animator.SetBool("Standing", isStanding); 
             }
 
         }
@@ -109,7 +108,7 @@ public class CutsceneAnimation : MonoBehaviour
         // Disable dialogue, open door, have Wretched come through, then resume dialogue
         dialogueOverlay.enabled = false;
         yield return new WaitForSeconds(0.5f);
-        Instantiate(ballPrefab, new Vector2(-11.0f, -3.45f), transform.rotation);
+        Instantiate(ballPrefab, new Vector2(-12.0f, -3.45f), transform.rotation);
         yield return new WaitForSeconds(1.0f);
         wretched.SetActive(true);
         yield return new WaitForSeconds(0.5f);
@@ -135,8 +134,10 @@ public class CutsceneAnimation : MonoBehaviour
         yield return advanceDialogue(gravitronSprite, "Well shoot... I better go get Atom.");
         dialogueOverlay.enabled = false;
 
+        //Move gravitron to the right and stop at the door
         gravitron.GetComponent<PlayerMovement>().horizontalInputs = 1.0f;
-
+        yield return new WaitForSeconds(1.32f);
+        gravitron.GetComponent<PlayerMovement>().horizontalInputs = 0f;
     }
 
     // Advance the dialogue
