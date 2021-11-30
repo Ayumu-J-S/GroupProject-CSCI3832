@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     float movementSpeed = 0.2f;
 
     // Affects player's jump height
-    float jumpForce = 350.0f;
+    public float jumpForce = 350.0f;
 
     // Affects player's fall speed
     private float gravityScale = 2.0f;
