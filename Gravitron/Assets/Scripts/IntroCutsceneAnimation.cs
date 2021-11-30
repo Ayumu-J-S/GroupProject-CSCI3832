@@ -4,20 +4,14 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class CutsceneAnimation : MonoBehaviour
+public class IntroCutsceneAnimation : MonoBehaviour
 {
-
-    // variables for animation
-    public Animator animator;
-    public bool isStanding = true;
-    public bool inTransition = false;
-
     // Variables for speech box (Note: This requires that a TextMeshPro called "Speech Text" is in the current scene)
     private GameObject speechTextObject;
     private TextMeshProUGUI speechText;
     private RawImage speakerSpriteObject;
-    public Texture gravitronSprite;
-    public Texture wretchedSprite;
+    private Texture gravitronSprite;
+    private Texture wretchedSprite;
     public Canvas dialogueOverlay;
 
     // Ball (for making door open)
@@ -48,49 +42,7 @@ public class CutsceneAnimation : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Switch between the dogs sit and stand animations
-        // this is tied to keyboard input for testing
-        // but can be changed so that the transition happens at different times
-        if (Input.GetKey(KeyCode.S) && !inTransition)
-        {
-
-            inTransition = true;
-            animator.SetBool("InTransition", inTransition);
-
-            if (isStanding)
-            {
-                isStanding = !isStanding;
-                StartCoroutine(SitRoutine());
-                animator.SetBool("Standing", isStanding);
-            }
-            else
-            {
-                isStanding = !isStanding;
-                StartCoroutine(SitRoutine());
-                animator.SetBool("Standing", isStanding); 
-            }
-
-        }
-
-    }
-
-    //  Make sure the shoooting animation plays completely before stopping
-    private IEnumerator SitRoutine()
-    {
-        // Wait for the rest of the animation to play
-        yield return new WaitForSeconds(.5f);
-
-        inTransition = false;
-        animator.SetBool("InTransition", inTransition);
-    }
-
-    private IEnumerator StandRoutine()
-    {
-        // Wait for the rest of the animation to play
-        yield return new WaitForSeconds(.5f);
-
-        inTransition = false;
-        animator.SetBool("InTransition", inTransition);
+        
     }
 
     // The cutscene can be controlled from here

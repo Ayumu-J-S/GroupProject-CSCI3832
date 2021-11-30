@@ -64,6 +64,9 @@ public class PlayerMovement : MonoBehaviour
     // Disables player controls when in cutscenes
     public bool isInCutscene = false;
 
+    // Enables shooting for part of outro cutscene
+    public bool shootInOutro = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -125,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
 
         // this put the character in the shooting state when the r key is pressed and then 
         // calls a coroutine to make sure that the animation plays in full
-        if(Input.GetKey(KeyCode.R) && isShooting == false && isInCutscene == false)
+        if(Input.GetKey(KeyCode.R) && isShooting == false && (isInCutscene == false || shootInOutro == true))
         {
             isShooting = true;
             animator.SetBool("Shooting", isShooting);

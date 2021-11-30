@@ -129,6 +129,7 @@ MonoBehaviour:
   gravityFlipAudio: {fileID: 8300000, guid: c6b2b8a747d4c40129eb0cc1a258390e, type: 3}
   spikeAudio: {fileID: 0}
   isInCutscene: 0
+  shootInOutro: 0
 --- !u!50 &6017142373972408088
 Rigidbody2D:
   serializedVersion: 4
