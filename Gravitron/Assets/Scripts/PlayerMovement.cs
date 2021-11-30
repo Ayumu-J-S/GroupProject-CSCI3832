@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public bool isShooting = false;
 
+    // The inputs for player movement (public for cutscene manipulation)
+    public float horizontalInputs = 0.0f;
+
     // Affects player's horizontal speed
     float movementSpeed = 0.2f;
 
@@ -57,6 +60,9 @@ public class PlayerMovement : MonoBehaviour
 
     // Variable to compare with the current scale of y in update
     private float previousScaleY;
+
+    // Disables player controls when in cutscenes
+    public bool isInCutscene = false;
 
     // Start is called before the first frame update
     void Start()
@@ -108,7 +114,10 @@ public class PlayerMovement : MonoBehaviour
         characterScale = transform.localScale;
 
         // Get the inputs from the player (A, D, and left and right arrows)
-        float horizontalInputs = Input.GetAxis("Horizontal");
+        if (!isInCutscene)
+        {
+            horizontalInputs = Input.GetAxis("Horizontal");
+        }
 
         // sets the Speed for the animator paramater so that the player switches to
         // running when running
@@ -116,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
 
         // this put the character in the shooting state when the r key is pressed and then 
         // calls a coroutine to make sure that the animation plays in full
-        if(Input.GetKey(KeyCode.R) && isShooting == false)
+        if(Input.GetKey(KeyCode.R) && isShooting == false && isInCutscene == false)
         {
             isShooting = true;
             animator.SetBool("Shooting", isShooting);
@@ -141,12 +150,12 @@ public class PlayerMovement : MonoBehaviour
         transform.position += horizontalMovement;
 
         // Switch gravity if up or down arrows are pressed
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) && !isInCutscene)
         {
             playerGravityDown = true;
             rgb.gravityScale = gravityScale;
         }
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) && !isInCutscene)
         {
             playerGravityDown = false;
             rgb.gravityScale = -gravityScale;
@@ -156,21 +165,21 @@ public class PlayerMovement : MonoBehaviour
         // Flips the character based on movement direction
 
         // Flips horizontal direction based on horizontalInputs
-        if(horizontalInputs < 0)
+        if(horizontalInputs < 0 && !isInCutscene)
         {
             characterScale.x = -0.3f;
         }
-        if(horizontalInputs > 0)
+        if(horizontalInputs > 0 && !isInCutscene)
         {
             characterScale.x = 0.3f;
         }
 
         // Flips vertical direction based on direction of gravity
-        if(playerGravityDown)
+        if(playerGravityDown && !isInCutscene)
         {
             characterScale.y = 0.3f;
         }
-        if(!playerGravityDown)
+        if(!playerGravityDown && !isInCutscene)
         {
             characterScale.y = -0.3f;
         }
@@ -180,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         // Jump if space pressed and player is on the ground (prevents jumping midair)
-        if (Input.GetKey(KeyCode.Space) && onGround)
+        if (Input.GetKey(KeyCode.Space) && onGround && !isInCutscene)
         {
             if (playerGravityDown)
             {

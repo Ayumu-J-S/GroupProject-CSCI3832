@@ -20,7 +20,7 @@ public class MenuButtonScript : MonoBehaviour
     // Start the game
     public void PlayGame()
     {
-        SceneManager.LoadScene("Level 1", LoadSceneMode.Single); // THIS WILL PROBABLY NEED TO BE CHANGED TO PLAY THE INTRO CUTSCENE INSTEAD
+        SceneManager.LoadScene("Intro", LoadSceneMode.Single);
     }
 
     // Open the How to Play menu
