@@ -11582,7 +11582,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa69c5209be66420fb47ef2c264b8e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diffuse: {fileID: 2100000, guid: adcd98faa53ec48b18c33513f23087fe, type: 2}
+  lightObj: {fileID: 0}
+  lightIntensity: 8.5
+  lightRange: 4
 --- !u!1001 &1691545596
 PrefabInstance:
   m_ObjectHideFlags: 0
