@@ -127,7 +127,7 @@ MonoBehaviour:
   characterScale: {x: 0, y: 0, z: 0}
   shootAudio: {fileID: 8300000, guid: 33c588ef71bc741edb1484dd22e28354, type: 3}
   gravityFlipAudio: {fileID: 8300000, guid: c6b2b8a747d4c40129eb0cc1a258390e, type: 3}
-  spikeAudio: {fileID: 0}
+  spikeAudio: {fileID: 8300000, guid: 9cc4bc05adc3244758381c15c9a60bb1, type: 3}
   isInCutscene: 0
   shootInOutro: 0
 --- !u!50 &6017142373972408088
@@ -261,5 +261,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 4.09, y: 7.2199993}
+  m_Size: {x: 3.67, y: 7.2199993}
   m_Direction: 0
