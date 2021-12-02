@@ -21,7 +21,6 @@ public class CheckPointController : MonoBehaviour
         if (checkPoint1 && !checkPoint2)
         {
             Player.transform.position = CheckPoint1Pos;
-            Debug.Log(CheckPoint1Pos);
         }
         else if (checkPoint1 && checkPoint2)
         {
