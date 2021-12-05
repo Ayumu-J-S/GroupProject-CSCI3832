@@ -1,2 +1,2 @@
-# GroupProject-CSCI3832
+# UnityGame-Gravitron
 Under development
