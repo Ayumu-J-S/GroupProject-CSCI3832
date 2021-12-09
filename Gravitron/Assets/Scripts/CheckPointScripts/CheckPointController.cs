@@ -32,9 +32,4 @@ public class CheckPointController : MonoBehaviour
                 new Vector3(-10.6999998f, -2.69000006f, 0);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }
