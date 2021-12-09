@@ -49,8 +49,6 @@ public class BallScript : MonoBehaviour
         // Get the direction the character is facing
         direction = playerScript.characterScale.x;
 
-        Debug.Log(direction);
-
         // If the character is facing right
         if (direction > 0)
         {
