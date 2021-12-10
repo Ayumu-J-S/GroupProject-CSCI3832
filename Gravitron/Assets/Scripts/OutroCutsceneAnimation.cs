@@ -175,7 +175,7 @@ public class OutroCutsceneAnimation : MonoBehaviour
 
     private IEnumerator WaitForShoot()
     {
-        for (int i = 50; i > 0; i--)
+        for (int i = 25; i > 0; i--)
         {
             if (ButtonScript.buttonPressed)
             {
