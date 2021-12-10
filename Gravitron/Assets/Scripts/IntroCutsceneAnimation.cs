@@ -78,11 +78,13 @@ public class IntroCutsceneAnimation : MonoBehaviour
         yield return advanceDialogue(gravitronSprite, "YOU STOLE MY DOG?!?!");
         yield return advanceDialogue(wretchedSprite, "MWAHAHAHA!!!\nI'll be waiting for you in my lab, if you have what it takes to save him.");
 
+        // Disable overlay and have Wretched leave
         dialogueOverlay.enabled = false;
         wretched.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         dialogueOverlay.enabled = true;
 
+        // Final dialogue
         yield return advanceDialogue(gravitronSprite, "Well shoot... I better go get Atom.");
         dialogueOverlay.enabled = false;
 

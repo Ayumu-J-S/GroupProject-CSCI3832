@@ -36,6 +36,7 @@ public class MenuButtonScript : MonoBehaviour
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
     }
 
+    // Close the application
     public void EndGame()
     {
         Application.Quit();

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseScript : MonoBehaviour
 {
-
+    // Pause menu canvas
     GameObject pauseMenu;
     
     // Start is called before the first frame update

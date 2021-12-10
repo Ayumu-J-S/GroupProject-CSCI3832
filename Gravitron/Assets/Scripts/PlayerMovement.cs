@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    /* Up and down arrows switch gravity, left and right arrows move (A and D also do this,
-     * if we want to change that we'll have to change the Axis), and space jumps
-     */
     public Camera camera;
     private Rigidbody2D rgb;
     private Vector3 horizontalMovement;
@@ -112,8 +109,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // NOTE: I made this a public variable so I can access it in the ball's script to know which way
-        // the character is facing (so the ball shoots in the right direction) - Theresa
         characterScale = transform.localScale;
 
         // Get the inputs from the player (A, D, and left and right arrows)
@@ -252,20 +247,15 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 playerPosition = transform.position;
 
-        /* DELETE THIS COMMENT LATER
-         * The raycasting may cause issues depending on the origin point of our character sprite's position
-         * if this script is put on the player and suddenly the jumping doesn't work that could be the cause
-         */
-
         // Raycast direction depends on whether gravity is going up or down for the player
         if (playerGravityDown)
         {
-            // Raycast above player to find collider within a distance of 0.01 (directly above)
+            // Raycast above player to find collider directly below
             collider = Physics2D.Raycast(playerPosition, Vector2.down, 1.15f);
         }
         else
         {
-            // Raycast above player to find collider within a distance of 0.01 (directly above)
+            // Raycast above player to find collider directly above
             collider = Physics2D.Raycast(playerPosition, Vector2.up, 1.15f);
         }
 

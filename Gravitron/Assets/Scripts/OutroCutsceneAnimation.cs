@@ -104,14 +104,23 @@ public class OutroCutsceneAnimation : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         dialogueOverlay.enabled = true;
 
+        // Inital dialogue
         yield return advanceDialogue(gravitronSprite, "Give me back my dog!!");
         yield return advanceDialogue(wretchedSprite, "Admit that you stole my research!!");
         yield return advanceDialogue(gravitronSprite, "You've never done a bit of research in your life!");
         yield return advanceDialogue(wretchedSprite, "Liar!! I'm keeping the dog!!!!");
         yield return advanceDialogue(gravitronSprite, "(Well shoot, what do I do now?)");
+
+        // Disable overlay
         dialogueOverlay.enabled = false;
+
+        // Allow player to shoot
         gravitron.GetComponent<PlayerMovement>().shootInOutro = true;
+
+        // Wait for player to shoot
         yield return WaitForShoot();
+
+        // If player still hasn't shot yet, prompt
         if (!ButtonScript.buttonPressed)
         {
             dialogueOverlay.enabled = true;
@@ -119,6 +128,8 @@ public class OutroCutsceneAnimation : MonoBehaviour
             dialogueOverlay.enabled = false;
             yield return WaitForShoot();
         }
+
+        // If player still hasn't shot yet, prompt
         if (!ButtonScript.buttonPressed)
         {
             dialogueOverlay.enabled = true;
@@ -126,6 +137,8 @@ public class OutroCutsceneAnimation : MonoBehaviour
             dialogueOverlay.enabled = false;
             yield return WaitForShoot();
         }
+
+        // If player still hasn't shot yet, prompt (this prompt will continue until player shoots)
         while (!ButtonScript.buttonPressed)
         {
             dialogueOverlay.enabled = true;
@@ -133,13 +146,18 @@ public class OutroCutsceneAnimation : MonoBehaviour
             dialogueOverlay.enabled = false;
             yield return WaitForShoot();
         }
+
+        // Disable shooting
         gravitron.GetComponent<PlayerMovement>().shootInOutro = false;
+
+        // Play animation to free the dog
         cageAnimator.Play("Cage Animation");
         inTransition = true;
         dogAnimator.SetBool("InTransition", inTransition);
         StartCoroutine(StandRoutine());
         dogAnimator.SetBool("Standing", isStanding);
 
+        // Finish cutscene
         yield return new WaitForSeconds(0.5f);
         dialogueOverlay.enabled = true;
         yield return advanceDialogue(wretchedSprite, "Wait what? This is my lab, why did I make that button do that???");
@@ -149,7 +167,7 @@ public class OutroCutsceneAnimation : MonoBehaviour
         dialogueOverlay.enabled = false;
 
 
-        //Move gravitron to the right and stop at the door
+        // Move gravitron to the right and stop at the door
         gravitron.GetComponent<PlayerMovement>().horizontalInputs = 1.0f;
         yield return new WaitForSeconds(1.32f);
         gravitron.GetComponent<PlayerMovement>().horizontalInputs = 0f;
@@ -173,10 +191,13 @@ public class OutroCutsceneAnimation : MonoBehaviour
 
     }
 
+    // Wait until player shoots
     private IEnumerator WaitForShoot()
     {
+        // Run for 2.5 seconds or until player shoots
         for (int i = 25; i > 0; i--)
         {
+            // If player shoots, break
             if (ButtonScript.buttonPressed)
             {
                 i = 0;
