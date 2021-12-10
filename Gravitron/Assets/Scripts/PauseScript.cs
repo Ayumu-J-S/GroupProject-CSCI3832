@@ -39,6 +39,8 @@ public class PauseScript : MonoBehaviour
     // Go back to the main menu
     public void MenuButton()
     {
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
     }
 }

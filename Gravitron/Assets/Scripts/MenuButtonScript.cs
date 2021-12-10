@@ -32,6 +32,7 @@ public class MenuButtonScript : MonoBehaviour
     // Go back to the main menu
     public void BackToMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
     }
 
