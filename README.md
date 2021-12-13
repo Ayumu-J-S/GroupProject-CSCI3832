@@ -7,6 +7,14 @@ The game is a 2D puzzle-platformer that follows the adventure of Dr. Gravitron a
 ## Artwork
 All the artwork, except for the Cage pixel art, including but not limited to Dr. Gravitron's pixel art, Dr. Wretched's pixel art, Door pixel art, Button pixel art, and Atom's pixel art were created by <a href="https://github.com/bwright-01">bwright-01</a>; thus copy right of the illustrations in this project belongs to <a href="https://github.com/bwright-01">bwright-01</a>.
 
+## Downloading the game
+You can download the build version from these links.
+<ul>
+  <li>Windows: https://drive.google.com/file/d/1NRRG-p4QFr7mujzEbwnD9YKl2R269JCa/view?usp=sharing</li>
+  <li>Mac with intel chip: https://drive.google.com/file/d/17V7OlIUxTs00UwCbBTXEKr9QbUehCxEa/view?usp=sharing</li>
+  <li>Mac with Apple silicon: https://drive.google.com/file/d/1Qe8Z7ZvBf4pGvn9PlioTTeMwVCYxwNAR/view?usp=sharing</li>
+</ul>
+
 ## Reference for the cage pixel art, background music and sound effects
 <ul>
   <li>Background Music: https://www.bensound.com/royalty-free-music/track/enigmatic</li>
