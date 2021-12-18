@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
         float currentScaleY = transform.localScale.y;
         if (currentScaleY != previousScaleY)
         {
-            audioSource.PlayOneShot(gravityFlipAudio);
+            audioSource.PlayOneShot(gravityFlipAudio, 0.5f);
         }
         previousScaleY = currentScaleY;
     }
