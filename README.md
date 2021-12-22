@@ -15,6 +15,8 @@ You can download the build version from these links.
   <li>Mac with Apple silicon: https://drive.google.com/file/d/1Qe8Z7ZvBf4pGvn9PlioTTeMwVCYxwNAR/view?usp=sharing</li>
 </ul>
 
+You can also play the game <a href = "https://ayumujs.itch.io/gravitron">here</a> without downloading the game on your machine.
+
 ## Reference for the cage sprite, background music and sound effects
 <ul>
   <li>Background Music: https://www.bensound.com/royalty-free-music/track/enigmatic</li>
